@@ -1,13 +1,17 @@
 #!/bin/bash
 
-sudo dnf update -y
+sudo yum update -y
+sudo yum install -y git httpd wget unzip
 
-sudo dnf install -y \
-  git \
-  wget \
-  httpd \
 sudo systemctl start httpd
 sudo systemctl enable httpd
-sudo groupadd Cloud
-sudo adduser Ohene 
-echo "Packages installed successfully!"
+
+sudo groupadd DevOps
+sudo useradd Serge
+
+wget https://github.com/utrains/static-resume/archive/refs/heads/main.zip
+unzip main.zip
+
+sudo cp -r static-resume-main/* /var/www/html/
+
+sudo systemctl restart httpd
